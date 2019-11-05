@@ -9,7 +9,6 @@ public class SuccessView {
 	public static void printSearchBySth(List<RestaurantDTO> list) {
 		for(int index = 0 ; index < list.size() ; index++)
 		System.out.println(list.get(index));
-		d;d
 	}
 	
 	public static void printReview(List<ReviewDTO> list) {
