@@ -13,19 +13,24 @@ public interface FoodReviewDAO {
 	 * 특정 문자열이 포함된 레코드 검색 -- 주소 검색
 	 * select * from board where subject like ?
 	 */
-	List<RestaurantDTO> SelectByaddr(String addr) throws SQLException;
+	List<RestaurantDTO> SelectByAddr(String addr) throws SQLException;
 
 	/**
 	 * 특정 문자열이 포함된 레코드 검색 -- 업소명 검색
 	 * select * from board where subject like ? 
 	 */
-	List<RestaurantDTO> SelectByName(String Name) throws SQLException;
+	List<RestaurantDTO> SelectByName(String name) throws SQLException;
 
 	/**
 	 * 특정 문자열이 포함된 레코드 검색 -- 음식 분류 검색
 	 * select * from board where subject like ? 
 	 */
 	List<RestaurantDTO> SelectByType(String foodType) throws SQLException;
+	
+	/**
+	 * 리뷰 전체검색
+	 */
+	List<ReviewDTO> SelectAll() throws SQLException;
 
 	/**
 	 * 리뷰 등록하기
