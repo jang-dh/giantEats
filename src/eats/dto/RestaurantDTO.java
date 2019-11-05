@@ -66,21 +66,18 @@ public class RestaurantDTO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("번호 = ");
 		builder.append(restaurantNo);
-		builder.append(" | 업소명 = ");
+		builder.append(" | 음식점 = ");
 		builder.append(restaurantName);
 		builder.append(" | 주소 = ");
 		builder.append(addr);
 		builder.append(" | 전화번호 = ");
 		builder.append(tel);
-		builder.append(" | 유형 = ");
+		builder.append(" | 음식종류 = ");
 		builder.append(foodType);
 		builder.append(" | 메인메뉴 = ");
 		builder.append(mainMenu);
-		
+
 		return  builder.toString();
 	}
-	
-	
-	
 	
 }
