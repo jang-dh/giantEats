@@ -64,17 +64,17 @@ public class RestaurantDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("¹øÈ£ = ");
+		builder.append("ë²ˆí˜¸ = ");
 		builder.append(restaurantNo);
-		builder.append(" | ¾÷¼Ò¸í = ");
+		builder.append(" | ìŒì‹ì  = ");
 		builder.append(restaurantName);
-		builder.append(" | ÁÖ¼Ò = ");
+		builder.append(" | ì£¼ì†Œ = ");
 		builder.append(addr);
-		builder.append(" | ÀüÈ­¹øÈ£ = ");
+		builder.append(" | ì „í™”ë²ˆí˜¸ = ");
 		builder.append(tel);
-		builder.append(" | À¯Çü = ");
+		builder.append(" | ìŒì‹ì¢…ë¥˜ = ");
 		builder.append(foodType);
-		builder.append(" | ¸ŞÀÎ¸Ş´º = ");
+		builder.append(" | ë©”ì¸ë©”ë‰´ = ");
 		builder.append(mainMenu);
 		
 		return  builder.toString();
