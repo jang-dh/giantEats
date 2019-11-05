@@ -20,7 +20,7 @@ public class PrintMenu {
 			
 			switch(menu) {
 				case "1":
-					searchStore();
+					searchRestaurant();
 					break;
 				case "2":
 					menuInsertReview();
@@ -36,7 +36,7 @@ public class PrintMenu {
 		}
 	}
 	
-	void searchStore() {
+	void searchRestaurant() {
 		System.out.println();
 		System.out.println("----------음식점 찾기----------");
 		System.out.println("1.지역    2.음식종류    3.지역/음식종류    4.이름");
@@ -47,16 +47,16 @@ public class PrintMenu {
 		
 		switch(menu) {
 			case "1":
-				searchStoreByAddr();
+				searchRestaurantByAddr();
 				break;
 			case "2":
-				searchStoreByFoodType();
+				searchRestaurantByFoodType();
 				break;
 			case "3":
-				searchStoreByAddrFoodType();
+				searchRestaurantByAddrFoodType();
 				break;
 			case "4":
-				searchStoreByName();
+				searchRestaurantByName();
 				break;
 			default :
 				System.out.println();
@@ -67,7 +67,7 @@ public class PrintMenu {
 	}
 	
 	void menuInsertReview() {
-		searchStore();
+		searchRestaurant();
 	}
 	
 	String selectAddrToSearch() {
@@ -126,10 +126,10 @@ public class PrintMenu {
 		return addr;
 	}
 	
-	void searchStoreByAddr() {
+	void searchRestaurantByAddr() {
 		String addr = selectAddrToSearch();
-		FoodReviewController.searchStoreByAddr(addr);
-		searchStoreByNo();
+		FoodReviewController.searchRestaurantByAddr(addr);
+		searchRestaurantByNo();
 	}
 	
 	String selectFoodTypeToSearch() {
@@ -160,31 +160,31 @@ public class PrintMenu {
 		return foodType; 
 	}
 	
-	void searchStoreByFoodType() {
+	void searchRestaurantByFoodType() {
 		String foodType = selectFoodTypeToSearch();
-		FoodReviewController.searchStoreByFoodType(foodType);
-		searchStoreByNo();
+		FoodReviewController.searchRestaurantByFoodType(foodType);
+		searchRestaurantByNo();
 		
 	}
 	
-	void searchStoreByAddrFoodType() {
+	void searchRestaurantByAddrFoodType() {
 		String addr = selectAddrToSearch();
 		String foodType = selectFoodTypeToSearch();
-		FoodReviewController.searchStoreByAddrFoodType(addr, foodType);
-		searchStoreByNo();
+		FoodReviewController.searchRestaurantByAddrFoodType(addr, foodType);
+		searchRestaurantByNo();
 	}
 	
-	void searchStoreByName() {
+	void searchRestaurantByName() {
 		System.out.println("----------음식점 이름으로 찾기----------");
 		System.out.print("입력 > ");
 		
 		String name = sc.next();
 		
-		FoodReviewController.searchStoreByName(name);
-		searchStoreByNo();
+		FoodReviewController.searchRestaurantByName(name);
+		searchRestaurantByNo();
 	}
 	
-	void searchStoreByNo() {
+	void searchRestaurantByNo() {
 		System.out.println();
 		System.out.println("-----음식점 코드로 찾기(Y/N)-----");
 		System.out.print("입력 > ");
@@ -202,7 +202,7 @@ public class PrintMenu {
 				}catch(NumberFormatException e) {
 					//FailView.errorMessage(e.getMessage());
 				}
-				RestaurantDTO searched = FoodReviewController.searchStoreByNo(code);
+				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(code);
 				selectPrintReviewMenu(searched);
 				break;
 			case "N":
