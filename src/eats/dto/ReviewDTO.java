@@ -57,15 +57,15 @@ public class ReviewDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(" | review ¹øÈ£ = ");
+		builder.append(" | review ë²ˆí˜¸ = ");
 		builder.append(reviewNo);
-		builder.append(" | º°Á¡ = ");
+		builder.append(" | ë³„ì  = ");
 		builder.append(score);
-		builder.append(" | µî·ÏÀÏ = ");
+		builder.append(" | ë“±ë¡ì¼ = ");
 		builder.append(regdate);
-		builder.append(" | ÀÛ¼ºÀÚ = ");
+		builder.append(" | ì‘ì„±ì = ");
 		builder.append(writer);
-		builder.append(" | ³»¿ë = ");
+		builder.append(" | ë‚´ìš© = ");
 		builder.append(content);
 		return builder.toString();
 	}

@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * DB ¿¬µ¿À» À§ÇÑ ·Îµå, ¿¬°á, ½ÇÇà
+ * DB ì—°ë™ì„ ìœ„í•œ ë¡œë“œ, ì—°ê²°, ì‹¤í–‰
  * */
 public class DbUtil {
 	/**
-	 * ·Îµå
+	 * ë¡œë“œ
 	 * */
 	static {
 		try{
@@ -22,7 +22,7 @@ public class DbUtil {
 	}
 	
 	/**
-	 * ¿¬°á
+	 * ì—°ê²°
 	 * */
 	public static Connection getConnection() throws SQLException{
 		return DriverManager.getConnection(
@@ -32,8 +32,8 @@ public class DbUtil {
 	}
 	
 	/**
-	 * ´İ±â(DB°ü·Ã »ç¿ëµÈ °´Ã¼¸¦ close()ÇÑ´Ù)
-	 * (INSERT, UPDATE, DELETEÀÎ °æ¿ì)
+	 * ë‹«ê¸°(DBê´€ë ¨ ì‚¬ìš©ëœ ê°ì²´ë¥¼ close()í•œë‹¤)
+	 * (INSERT, UPDATE, DELETEì¸ ê²½ìš°)
 	 * */
 	public static void dbClose(Connection con, Statement stmt){
 		try{
@@ -45,8 +45,8 @@ public class DbUtil {
 	}
 	
 	/**
-	 * ´İ±â(DB°ü·Ã »ç¿ëµÈ °´Ã¼¸¦ close()ÇÑ´Ù)
-	 * (SELECTÀÎ °æ¿ì)
+	 * ë‹«ê¸°(DBê´€ë ¨ ì‚¬ìš©ëœ ê°ì²´ë¥¼ close()í•œë‹¤)
+	 * (SELECTì¸ ê²½ìš°)
 	 * */
 	public static void dbClose(Connection con, Statement stmt, ResultSet rs){
 		try{

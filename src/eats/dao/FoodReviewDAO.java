@@ -5,8 +5,6 @@ import java.util.List;
 
 import eats.dto.RestaurantDTO;
 import eats.dto.ReviewDTO;
-import kosta.mvc.model.dto.BoardDTO;
-
 
 public interface FoodReviewDAO {
 

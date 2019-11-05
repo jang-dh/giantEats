@@ -1,7 +1,7 @@
 package eats.util;
 
 /**
- * DB¼³Á¤ Á¤º¸¸¦ »ó¼öÇÊµå·Î °ü¸®
+ * DBì„¤ì • ì •ë³´ë¥¼ ìƒìˆ˜í•„ë“œë¡œ ê´€ë¦¬
  * */
 public interface DbProperty {
 	public static final String DRIVER_NAME="oracle.jdbc.driver.OracleDriver";
