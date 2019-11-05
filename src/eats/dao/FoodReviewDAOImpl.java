@@ -13,7 +13,7 @@ import eats.dto.ReviewDTO;
 import eats.util.DbUtil;
 
 public class FoodReviewDAOImpl implements FoodReviewDAO {
-	private Properties proFile = DbUtil.getProFile();
+	private Properties proFile = DbUtil.getProFile();d;
 	
 	@Override
 	public List<RestaurantDTO> selectRestaurantByAddr(String addr) throws SQLException {
