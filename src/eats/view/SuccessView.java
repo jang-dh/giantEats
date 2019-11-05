@@ -6,7 +6,7 @@ import eats.dto.RestaurantDTO;
 import eats.dto.ReviewDTO;
 
 public class SuccessView {
-	public static void searchBySth(List<RestaurantDTO> list) {
+	public static void printSearchBySth(List<RestaurantDTO> list) {
 		for(int index = 0 ; index < list.size() ; index++)
 		System.out.println(list.get(index));
 	}
