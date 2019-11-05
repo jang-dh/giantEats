@@ -1,5 +1,7 @@
 package eats.view;
 
+
+import java.util.List;
 import java.util.Scanner;
 
 import eats.controller.FoodReviewController;
@@ -128,8 +130,9 @@ public class PrintMenu {
 	
 	void searchRestaurantByAddr() {
 		String addr = selectAddrToSearch();
-		FoodReviewController.searchRestaurantByAddr(addr);
-		searchRestaurantByNo();
+		List<RestaurantDTO> list = FoodReviewController.searchRestaurantByAddr(addr);
+		if(list != null && !list.isEmpty())
+			searchRestaurantByNo();
 	}
 	
 	String selectFoodTypeToSearch() {

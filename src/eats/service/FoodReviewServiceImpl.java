@@ -15,7 +15,6 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 				
 	@Override
 	public List<RestaurantDTO> selectRestaurantByAddr(String addr) throws SQLException {
-		
 		List<RestaurantDTO> list = dao.selectRestaurantByAddr(addr);
 		
 		if(list == null || list.isEmpty()) {

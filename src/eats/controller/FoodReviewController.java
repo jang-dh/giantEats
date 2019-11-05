@@ -12,14 +12,16 @@ import eats.view.SuccessView;
 public class FoodReviewController {
 	private static FoodReviewService service = new FoodReviewServiceImpl();
 	
-	public static void searchRestaurantByAddr(String addr) {
+	public static List<RestaurantDTO> searchRestaurantByAddr(String addr) {
+		List<RestaurantDTO> list = null;
 		try {
-			List<RestaurantDTO> list = service.selectRestaurantByAddr(addr);
+			list = service.selectRestaurantByAddr(addr);
 			if(list != null | !list.isEmpty())
 				SuccessView.printSearchBySth(list);;
 		}catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		return list;
 	}
 	
 	public static void searchRestaurantByFoodType(String foodType) {

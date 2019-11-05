@@ -25,7 +25,7 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, addr);
+			ps.setString(1, "%"+addr+"%");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				int restaurantNo = rs.getInt(1);

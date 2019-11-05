@@ -26,7 +26,7 @@ public class DbUtil {
 	 * */
 	static {
 		try{
-			proFile.load(new FileInputStream("src/util/dbInfo.properties"));
+			proFile.load(new FileInputStream("src/eats/util/dbInfo.properties"));
 			Class.forName(DbProperty.DRIVER_NAME);
 		}catch(Exception e){
 			e.printStackTrace();
