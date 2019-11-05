@@ -264,7 +264,7 @@ public class PrintMenu {
 		try {
 			Integer.parseInt(score);
 		}catch (NumberFormatException e) {
-			FailView.erroMessage("숫자로 입력해주세요.");
+			FailView.errorMessage("숫자로 입력해주세요.");
 		}
 		System.out.println("내용 > ");
 		String content = sc.next();
@@ -280,7 +280,7 @@ public class PrintMenu {
 		try {
 			Integer.parseInt(reviewNo);
 		}catch (NumberFormatException e) {
-			FailView.erroMessage("숫자로 입력해주세요.");
+			FailView.errorMessage("숫자로 입력해주세요.");
 		}
 
 		ReviewDTO updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
@@ -290,7 +290,7 @@ public class PrintMenu {
 		try {
 			Integer.parseInt(score);
 		}catch (NumberFormatException e) {
-			FailView.erroMessage("숫자로 입력해주세요.");
+			FailView.errorMessage("숫자로 입력해주세요.");
 		}
 		System.out.println("내용 > ");
 		String content = sc.next();
@@ -306,7 +306,7 @@ public class PrintMenu {
 		try {
 			Integer.parseInt(reviewNo);
 		}catch (NumberFormatException e) {
-			FailView.erroMessage("숫자로 입력해주세요.");
+			FailView.errorMessage("숫자로 입력해주세요.");
 		}
 		
 		ReviewDTO deleted = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));

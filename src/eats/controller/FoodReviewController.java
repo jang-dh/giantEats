@@ -1,41 +1,102 @@
 package eats.controller;
 
+import java.util.List;
+
 import eats.dto.RestaurantDTO;
 import eats.dto.ReviewDTO;
+import eats.service.FoodReviewService;
+import eats.service.FoodReviewServiceImpl;
+import eats.view.FailView;
+import eats.view.SuccessView;
 
 public class FoodReviewController {
+	private static FoodReviewService service = new FoodReviewServiceImpl();
+	
 	public static void searchRestaurantByAddr(String addr) {
-		
+		try {
+			List<RestaurantDTO> list = service.selectRestaurantByAddr(addr);
+			if(list != null | !list.isEmpty())
+				SuccessView.printSearchBySth(list);;
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 	public static void searchRestaurantByFoodType(String foodType) {
-		
+		try {
+			List<RestaurantDTO> list = service.selectRestaurantByFoodType(foodType);
+			if(list != null | !list.isEmpty())
+				SuccessView.printSearchBySth(list);;
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	public static void searchRestaurantByAddrFoodType(String addr, String foodType) {
-		
+		try {
+			List<RestaurantDTO> list = service.selectRestaurantByFoodType(foodType);
+			if(list != null | !list.isEmpty())
+				SuccessView.printSearchBySth(list);;
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 	public static void searchRestaurantByName(String name) {
-		
+		try {
+			List<RestaurantDTO> list = service.selectRestaurantByName(name);
+			if(list != null | !list.isEmpty())
+				SuccessView.printSearchBySth(list);;
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 	public static RestaurantDTO searchRestaurantByNo(String no) {
-		return null;
+		RestaurantDTO restaurantDTO = null;
+		try {
+			restaurantDTO = service.selectRestaurantByNo(no);
+			if(restaurantDTO != null)
+				SuccessView.printRestaurant(restaurantDTO);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return restaurantDTO;
 	}
 	
 	public static void insertReview(ReviewDTO reviewDTO) {
-		
+		try {
+			service.insertReview(reviewDTO);
+			SuccessView.printMessage("리뷰가 등록되었습니다.");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 	public static void updateReview(ReviewDTO reviewDTO) {
-		
+		try {
+			service.updateReview(reviewDTO);
+			SuccessView.printMessage("리뷰가 수정되었습니다.");
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());		}
 	}
 	public static void deleteReview(int no) {
-		
+		try {
+			service.deleteReview(no);
+			SuccessView.printMessage("리뷰가 삭제되었습니다.");
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 	public static ReviewDTO selectReviewByNo(int no) {
-		return null;
+		ReviewDTO result = null;
+		try {
+			result = service.selectReviewByNo(no);
+			//SuccessView.
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
 	}
 	
 }
