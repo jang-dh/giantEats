@@ -20,7 +20,7 @@ public interface FoodReviewDAO {
 	RestaurantDTO selectRestaurantByNo(String restaurantNo) throws SQLException;
 	
 	int insertReview(ReviewDTO reviewDTO) throws SQLException;
-	
+
 	
 	int updateReview(ReviewDTO reviewDTO) throws SQLException;
 	
