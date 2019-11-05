@@ -16,9 +16,22 @@ public class SuccessView {
 			System.out.println(list.get(index) + " " + printStar(list.get(index).getScore()));
 	}
 	
+	public static void printRestaurant(RestaurantDTO restaurantDTO) {
+		System.out.println(restaurantDTO);
+	}
+	
+	public static void printReview(ReviewDTO reviewDTO) {
+		System.out.println(reviewDTO + " " + printStar(reviewDTO.getScore()));
+	}
+	
+	public static void printMessage(String message) {
+		System.out.println(message);
+	}
+
 	public static String printStar(int score) {
 		String star = null;
 		for(int i = 0 ; i < score; i ++) star += "★";
 		return star;
 	}
+	
 }

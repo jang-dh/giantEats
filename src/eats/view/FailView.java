@@ -2,7 +2,7 @@ package eats.view;
 
 public class FailView {
 	
-	public static void erroMessage(String message) {
+	public static void errorMessage(String message) {
 		System.out.println(message);
 	}
 
