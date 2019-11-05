@@ -1,28 +1,36 @@
 package eats.util;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
- * DB ¿¬µ¿À» À§ÇÑ ·Îµå, ¿¬°á, ½ÇÇà
+ * DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
  * */
 public class DbUtil {
+	private static Properties proFile = new Properties();
 	/**
-	 * ·Îµå
+	 * ï¿½Îµï¿½
 	 * */
 	static {
 		try{
+			proFile.load(new FileInputStream("src/util/dbInfo.properties"));
 			Class.forName(DbProperty.DRIVER_NAME);
-		}catch(ClassNotFoundException e){
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+	public static Properties getProFile() {
+		return proFile;
+	}
+	
 	/**
-	 * ¿¬°á
+	 * ï¿½ï¿½ï¿½ï¿½
 	 * */
 	public static Connection getConnection() throws SQLException{
 		return DriverManager.getConnection(
@@ -31,9 +39,10 @@ public class DbUtil {
 				DbProperty.PASSWORD);
 	}
 	
+	
 	/**
-	 * ´Ý±â(DB°ü·Ã »ç¿ëµÈ °´Ã¼¸¦ close()ÇÑ´Ù)
-	 * (INSERT, UPDATE, DELETEÀÎ °æ¿ì)
+	 * ï¿½Ý±ï¿½(DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ close()ï¿½Ñ´ï¿½)
+	 * (INSERT, UPDATE, DELETEï¿½ï¿½ ï¿½ï¿½ï¿½)
 	 * */
 	public static void dbClose(Connection con, Statement stmt){
 		try{
@@ -45,8 +54,8 @@ public class DbUtil {
 	}
 	
 	/**
-	 * ´Ý±â(DB°ü·Ã »ç¿ëµÈ °´Ã¼¸¦ close()ÇÑ´Ù)
-	 * (SELECTÀÎ °æ¿ì)
+	 * ï¿½Ý±ï¿½(DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ close()ï¿½Ñ´ï¿½)
+	 * (SELECTï¿½ï¿½ ï¿½ï¿½ï¿½)
 	 * */
 	public static void dbClose(Connection con, Statement stmt, ResultSet rs){
 		try{

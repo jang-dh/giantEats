@@ -36,6 +36,5 @@ public interface FoodReviewService {
 	/**
 	 * 게시물 삭제
 	 */
-	void reviewDelete(int reviewNo) throws SQLException;
 
 }
