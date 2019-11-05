@@ -110,6 +110,6 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 		if(result == null) {
 			throw new SQLException("리뷰를 찾을 수 없습니다.");
 		}
-		return result;
+		return result;;
 	}
 }
