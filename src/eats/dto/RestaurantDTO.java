@@ -76,11 +76,8 @@ public class RestaurantDTO {
 		builder.append(foodType);
 		builder.append(" | 메인메뉴 = ");
 		builder.append(mainMenu);
-		
+
 		return  builder.toString();
 	}
-	
-	
-	
 	
 }

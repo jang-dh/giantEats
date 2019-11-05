@@ -12,9 +12,9 @@ public interface FoodReviewDAO {
 	/**
 	 * �듅�젙 臾몄옄�뿴�씠 �룷�븿�맂 �젅肄붾뱶 寃��깋 -- 二쇱냼 寃��깋
 	 * select * from board where subject like ?
-	 */
+	 */	
 	List<RestaurantDTO> SelectByAddr(String addr) throws SQLException;
-	
+
 	/**
 	 * �듅�젙 臾몄옄�뿴�씠 �룷�븿�맂 �젅肄붾뱶 寃��깋 -- �뾽�냼紐� 寃��깋
 	 * select * from board where subject like ? 
