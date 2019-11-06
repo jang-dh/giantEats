@@ -15,7 +15,7 @@ public class PrintMenu {
 	void printMainMenu() {
 		while(true) {
 			System.out.println("----------GiantEats!----------");
-			System.out.println("1.음식점 찾기\t 2.리뷰 등록\n\nx.프로그램 종료");
+			System.out.println("1.음식점 찾기\t 2.리뷰 등록\n\nX.프로그램 종료");
 			System.out.println("------------------------------");
 			System.out.print("메뉴 선택 > ");
 			String menu = sc.next();
@@ -33,7 +33,7 @@ public class PrintMenu {
 					System.exit(0);
 					break;
 				default :
-					System.out.println("--다시 입력하세요.");
+					FailView.errorMessage("--다시 입력하세요.");
 			}
 		}
 	}
@@ -43,7 +43,7 @@ public class PrintMenu {
 		System.out.println();
 		System.out.println("----------음식점 찾기----------");
 		System.out.println("1.지역    2.음식종류    3.지역/음식종류    4.이름");
-		System.out.println("X. 메인으로 돌아가기");
+		System.out.println("X.메인으로 돌아가기");
 		System.out.println("------------------------------");
 		System.out.print("메뉴 선택 > ");
 		
@@ -68,7 +68,7 @@ public class PrintMenu {
 				System.out.println("--메인 메뉴로 돌아갑니다.");
 				break;
 			default :
-				System.out.println("--다시 입력하세요.");
+				FailView.errorMessage("--다시 입력하세요.");
 				printRestaurantMenu();
 				break;
 		}
@@ -87,7 +87,7 @@ public class PrintMenu {
 		System.out.println("1.교동      2.금호동    3.노학동    4.대포동");
 		System.out.println("5.도문동    6.동명동    7.설악동    8.영랑동");
 		System.out.println("9.장사동    10.조양동   11.중앙동   12.청호동");
-		System.out.println("X. 메인으로 돌아가기");
+		System.out.println("X.메인으로 돌아가기");
 		System.out.println("------------------------------");
 		System.out.print("지역 선택 > ");
 
@@ -138,7 +138,7 @@ public class PrintMenu {
 				System.out.println("--메인 메뉴로 돌아갑니다.");
 				break;
 			default :
-				System.out.println("--다시 입력하세요.");
+				FailView.errorMessage("--다시 입력하세요.");
 				addr = selectAddrToSearch();
 				break;
 		}
@@ -147,8 +147,10 @@ public class PrintMenu {
 	
 	//선택한 지역으로 검색
 	void searchRestaurantByAddr() {
+		List<RestaurantDTO> list = null;
 		String addr = selectAddrToSearch();
-		List<RestaurantDTO> list = FoodReviewController.searchRestaurantByAddr(addr);
+		if(addr != null)
+			list = FoodReviewController.searchRestaurantByAddr(addr);
 		if(list != null && !list.isEmpty())
 			searchRestaurantByNo(list);
 	}
@@ -158,8 +160,10 @@ public class PrintMenu {
 		System.out.println();
 		System.out.println("----------음식 종류로 음식점 찾기----------");
 		System.out.println("1.한식    2.중식    3.양식    4.일식    5.뷔페");
-		System.out.println("X. 메인으로 돌아가기");
+		System.out.println("X.메인으로 돌아가기");
 		System.out.print("종류 선택 > ");
+
+		sc.nextLine();
 		String menu = sc.next();
 		String foodType = null;
 		
@@ -185,7 +189,7 @@ public class PrintMenu {
 				System.out.println("--메인 메뉴로 돌아갑니다.");
 				break;
 			default :
-				System.out.println("--다시 입력하세요.");
+				FailView.errorMessage("--다시 입력하세요.");
 				foodType = selectFoodTypeToSearch();
 				break;
 		}
@@ -195,8 +199,11 @@ public class PrintMenu {
 	//선택한 음식 종류로 검색
 	void searchRestaurantByFoodType() {
 		String foodType = selectFoodTypeToSearch();
-		List<RestaurantDTO> searched = FoodReviewController.searchRestaurantByFoodType(foodType);
-		searchRestaurantByNo(searched);
+		List<RestaurantDTO> searched = null;
+		if(foodType != null)
+			searched = FoodReviewController.searchRestaurantByFoodType(foodType);
+		if(searched != null && !searched.isEmpty())
+			searchRestaurantByNo(searched);
 		
 	}
 	
@@ -204,16 +211,24 @@ public class PrintMenu {
 	void searchRestaurantByAddrFoodType() {
 		String addr = selectAddrToSearch();
 		String foodType = selectFoodTypeToSearch();
-		List<RestaurantDTO> searched =FoodReviewController.searchRestaurantByAddrFoodType(addr, foodType);
-		searchRestaurantByNo(searched);
+		List<RestaurantDTO> searched = null;
+		
+		if(addr != null && foodType != null)
+			searched = FoodReviewController.searchRestaurantByAddrFoodType(addr, foodType);
+		if(searched != null && !searched.isEmpty())
+			searchRestaurantByNo(searched);
 	}
 	
 	//입력한 음식점 이름을 포함하는 레코드 검색
 	void searchRestaurantByName() {
 		System.out.println("----------음식점 이름으로 찾기----------");
+		System.out.println("X. 메인으로 돌아가기");
 		System.out.print("입력 > ");
 		
 		String name = sc.next();
+		
+		if(name.equals("X") || name.equals("x"))
+			return;
 		
 		List<RestaurantDTO> searched = FoodReviewController.searchRestaurantByName(name);
 		if(searched != null && !searched.isEmpty())
@@ -237,7 +252,7 @@ public class PrintMenu {
 			case "n":
 				break;
 			default :
-				System.out.println("--다시 입력하세요.");
+				FailView.errorMessage("--다시 입력하세요.");
 				searchRestaurantByNo(list);
 				break;
 		}
@@ -251,40 +266,22 @@ public class PrintMenu {
 		try {
 			Integer.parseInt(code);
 			RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code), list);
-			selectPrintReviewMenu(searched);
+			if(searched != null)
+				printReviewMenu(searched);
+			else
+				searchRestaurantByNo(list);
 		}catch(NumberFormatException e) {
-			System.out.println("--숫자를 입력해주세요.");
+			FailView.errorMessage("--숫자를 입력해주세요.");
 			selectRestorantNoForSearch(list);
 		}
 	}
 	
-	//음식점 출력 후 리뷰 메뉴 보는 여부 선택
-	void selectPrintReviewMenu(RestaurantDTO restaurantDTO) {
-		System.out.println("----메뉴 더보기(Y/N)");
-		System.out.print("입력 > ");
-		
-		String menu = sc.next();
-		
-		switch(menu) {
-			case "Y":
-			case "y":
-				printReviewMenu(restaurantDTO);
-				break;
-			case "N":
-			case "n":
-				break;
-			default :
-				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-				selectPrintReviewMenu(restaurantDTO);
-				break;
-		}
-	}
-	
-	//리뷰 메뉴 화면(리뷰 등록 메뉴의 화면 아님)
+	//음식점 출력 후 리뷰 메뉴 화면(리뷰 등록 메뉴의 화면 아님)
 	void printReviewMenu(RestaurantDTO restaurantDTO) {
+		System.out.println();
 		System.out.println("----------메뉴----------");		
 		System.out.println("1.리뷰 등록    2.리뷰 수정    3.리뷰 삭제");
-		System.out.println("X : 나가기");
+		System.out.println("X.메인으로 돌아가기");
 		System.out.print("메뉴 입력 > ");
 	
 		String menu = sc.next();
@@ -296,11 +293,18 @@ public class PrintMenu {
 			case "2":
 				if(restaurantDTO.getList() != null && !restaurantDTO.getList().isEmpty())
 					updateReview();
-				else
+				else {
 					FailView.errorMessage("수정할 리뷰가 없습니다. 리뷰를 등록해주세요.");
+					printReviewMenu(restaurantDTO);
+				}
 				break;
 			case "3":
-				deleteReview();
+				if(restaurantDTO.getList() != null && !restaurantDTO.getList().isEmpty())
+					deleteReview();
+				else {
+					FailView.errorMessage("삭제할 리뷰가 없습니다. 리뷰를 등록해주세요.");
+					printReviewMenu(restaurantDTO);
+				}
 				break;
 			case "X":
 			case "x":
@@ -308,7 +312,7 @@ public class PrintMenu {
 				System.out.println("--메인 메뉴로 돌아갑니다.");
 				break;	
 			default :
-				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				FailView.errorMessage("잘못된 입력입니다. 다시 입력해주세요.");
 				printReviewMenu(restaurantDTO);
 				break;
 		}
@@ -323,7 +327,7 @@ public class PrintMenu {
 			System.out.println("----------리뷰 등록----------");		
 			System.out.print("작성자 > ");
 			writer = sc.next();
-			System.out.print("별점(1~5점) > ");
+			System.out.print("별점(1 ~ 5점) > ");
 			score = sc.nextInt();
 			sc.nextLine();
 			System.out.print("내용 > ");
@@ -346,7 +350,7 @@ public class PrintMenu {
 		
 		if (updated != null) {
 			try {
-				System.out.print("별점(1~5점) > ");
+				System.out.print("별점(1 ~ 5점) > ");
 				score = sc.next();
 				sc.nextLine();
 				updated.setScore(Integer.parseInt(score));

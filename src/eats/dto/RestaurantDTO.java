@@ -77,9 +77,9 @@ public class RestaurantDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();;
-		builder.append(String.format("%10d | %s | ", restaurantNo, restaurantName));
-		builder.append(String.format("%s | %s | ", addr, tel));
-		builder.append(String.format("%s | %s | ", foodType, mainMenu));
+		builder.append(String.format("%10d  |  %s  |  ", restaurantNo, restaurantName));
+		builder.append(String.format("%s  |  %s  |  ", addr, tel));
+		builder.append(String.format("%s", foodType));
 		return  builder.toString();
 	}
 	

@@ -7,7 +7,7 @@ import eats.dto.ReviewDTO;
 
 public class SuccessView {
 	public static void printSearchBySth(List<RestaurantDTO> list) {
-		System.out.printf("%s | %10s | %30s | %15s | %s\n", "음식점코드", "이름", "주소", "전화번호", "음식종류");
+		System.out.printf("%s  |  %-10s  |  %-28s  |  %-8s  |  %s\n", "음식점코드", "이름", "주소", "전화번호", "음식종류");
 		for(int index = 0 ; index < list.size() ; index++)
 			System.out.println(list.get(index));
 	}
@@ -15,11 +15,11 @@ public class SuccessView {
 	public static void printReview(List<ReviewDTO> list) {
 		System.out.println("-----리뷰 목록-----");
 		for(ReviewDTO reviewDTO : list)
-			System.out.printf("리뷰 번호  %d | %s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
+			System.out.printf("리뷰 번호 %d | %-6s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
 	
 	public static void printReview(ReviewDTO reviewDTO) {
-		System.out.printf("리뷰 번호  %d | %s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
+		System.out.printf("리뷰 번호 %d | %-6s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
 	
 	
@@ -32,7 +32,6 @@ public class SuccessView {
 		System.out.printf("종류 : %s\n", restaurantDTO.getFoodType());
 		System.out.printf("주 메뉴 : %s\n", restaurantDTO.getMainMenu());
 		printReview(restaurantDTO.getList());
-		System.out.println();
 	}
 	
 	

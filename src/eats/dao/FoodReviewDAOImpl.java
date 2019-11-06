@@ -254,8 +254,6 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		//review.selectByRestaurantNo=SELECT * FROM review where restaurant_no =? order by regdate desc
-
 		String sql = proFile.getProperty("review.selectByRestaurantNo");
 		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		try {
