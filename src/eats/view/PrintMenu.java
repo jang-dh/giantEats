@@ -11,18 +11,18 @@ import eats.dto.ReviewDTO;
 public class PrintMenu {
 	Scanner sc = new Scanner(System.in);
 	
+	//메인화면
 	void printMainMenu() {
 		while(true) {
 			System.out.println("----------GiantEats!----------");
 			System.out.println("1.음식점 찾기\t 2.리뷰 등록\n\nx.프로그램 종료");
 			System.out.println("------------------------------");
 			System.out.print("메뉴 선택 > ");
-			
 			String menu = sc.next();
 			
 			switch(menu) {
 				case "1":
-					searchRestaurant();
+					printRestaurantMenu();
 					break;
 				case "2":
 					menuInsertReview();
@@ -38,7 +38,8 @@ public class PrintMenu {
 		}
 	}
 	
-	void searchRestaurant() {
+	//음식점 찾기 화면
+	void printRestaurantMenu() {
 		System.out.println();
 		System.out.println("----------음식점 찾기----------");
 		System.out.println("1.지역    2.음식종류    3.지역/음식종류    4.이름");
@@ -68,16 +69,18 @@ public class PrintMenu {
 				break;
 			default :
 				System.out.println("--다시 입력하세요.");
-				searchRestaurant();
+				printRestaurantMenu();
 				break;
 		}
 		System.out.println();
 	}
 	
+	//리뷰 등록 화면
 	void menuInsertReview() {
-		searchRestaurant();
+		printRestaurantMenu();
 	}
 	
+	//검색할 지역 선택
 	String selectAddrToSearch() {
 		System.out.println();
 		System.out.println("----------지역으로 음식점 찾기----------");
@@ -142,6 +145,7 @@ public class PrintMenu {
 		return addr;
 	}
 	
+	//선택한 지역으로 검색
 	void searchRestaurantByAddr() {
 		String addr = selectAddrToSearch();
 		List<RestaurantDTO> list = FoodReviewController.searchRestaurantByAddr(addr);
@@ -149,13 +153,13 @@ public class PrintMenu {
 			searchRestaurantByNo();
 	}
 	
+	//검색할 음식 종류 선택
 	String selectFoodTypeToSearch() {
 		System.out.println();
 		System.out.println("----------음식 종류로 음식점 찾기----------");
 		System.out.println("1.한식    2.중식    3.양식    4.일식    5.뷔페");
 		System.out.println("X. 메인으로 돌아가기");
 		System.out.print("종류 선택 > ");
-		//sc.hasNextLine();
 		String menu = sc.next();
 		String foodType = null;
 		
@@ -188,6 +192,7 @@ public class PrintMenu {
 		return foodType; 
 	}
 	
+	//선택한 음식 종류로 검색
 	void searchRestaurantByFoodType() {
 		String foodType = selectFoodTypeToSearch();
 		FoodReviewController.searchRestaurantByFoodType(foodType);
@@ -195,6 +200,7 @@ public class PrintMenu {
 		
 	}
 	
+	//선택한 지역과 음식 종류로 검색
 	void searchRestaurantByAddrFoodType() {
 		String addr = selectAddrToSearch();
 		String foodType = selectFoodTypeToSearch();
@@ -202,16 +208,19 @@ public class PrintMenu {
 		searchRestaurantByNo();
 	}
 	
+	//입력한 음식점 이름을 포함하는 레코드 검색
 	void searchRestaurantByName() {
 		System.out.println("----------음식점 이름으로 찾기----------");
 		System.out.print("입력 > ");
 		
 		String name = sc.next();
 		
-		FoodReviewController.searchRestaurantByName(name);
-		searchRestaurantByNo();
+		List<RestaurantDTO> searched = FoodReviewController.searchRestaurantByName(name);
+		if(searched != null && !searched.isEmpty())
+			searchRestaurantByNo();
 	}
 	
+	//음식점 코드로 검색
 	void searchRestaurantByNo() {
 		System.out.println();
 		System.out.println("-----음식점 코드로 찾기(Y/N)-----");
@@ -249,6 +258,7 @@ public class PrintMenu {
 		}
 	}
 	
+	//음식점 출력 후 리뷰 메뉴 보는 여부 선택
 	void selectPrintReviewMenu(RestaurantDTO restaurantDTO) {
 		System.out.println("----메뉴 더보기(Y/N)");
 		System.out.print("입력 > ");
@@ -270,12 +280,13 @@ public class PrintMenu {
 		}
 	}
 	
+	//리뷰 메뉴 화면(리뷰 등록 메뉴의 화면 아님)
 	void printReviewMenu(RestaurantDTO restaurantDTO) {
 		System.out.println("----------메뉴----------");		
 		System.out.println("1.리뷰 등록    2.리뷰 수정    3.리뷰 삭제");
 		System.out.println("X : 나가기");
 		System.out.print("메뉴 입력 > ");
-		sc.nextLine(); //버퍼 비움
+	
 		String menu = sc.next();
 		
 		switch(menu) {
@@ -300,6 +311,7 @@ public class PrintMenu {
 		}
 	}
 	
+	//리뷰 등록 화면
 	void insertReview(RestaurantDTO restaurantDTO) {
 		String writer = null;
 		int score = 0;
@@ -323,49 +335,57 @@ public class PrintMenu {
 		}
 	}
 	
+	//리뷰 수정
 	void updateReview() {
-		String reviewNo = null;
-		ReviewDTO updated = null;
 		String score = null;
 		String content = null;
-		try {
-			System.out.println("----------리뷰 수정----------");
-			System.out.print("수정할 리뷰 번호> ");
-			reviewNo = sc.next();
-			updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
-			if (updated != null) {
-				try {
-					System.out.print("별점(1~5점) > ");
-					score = sc.next();
-					sc.nextLine();
-					updated.setScore(Integer.parseInt(score));
-					System.out.print("내용 > ");
-					content = sc.nextLine();
-					updated.setContent(content);
-					FoodReviewController.updateReview(updated);
-				}catch(Exception e) {
-					FailView.errorMessage("숫자로 입력해주세요.");
-					updateReview();
-				}
-			}else {
+		ReviewDTO updated = selectUpdatedReview();
+		
+		if (updated != null) {
+			try {
+				System.out.print("별점(1~5점) > ");
+				score = sc.next();
+				sc.nextLine();
+				updated.setScore(Integer.parseInt(score));
+				System.out.print("내용 > ");
+				content = sc.nextLine();
+				updated.setContent(content);
+				FoodReviewController.updateReview(updated);
+			}catch(Exception e) {
+				FailView.errorMessage("숫자로 입력해주세요.");
 				updateReview();
 			}
-		}catch (Exception e) {
-			FailView.errorMessage("숫자로 입력해주세요.");
+		}else {
 			updateReview();
 		}
-
+		
 	}
 	
+	//수정할 리뷰 선택
+	ReviewDTO selectUpdatedReview() {
+		String reviewNo = null;
+		ReviewDTO updated = null;
+		try {
+			System.out.println("----------리뷰 수정----------");
+			System.out.print("수정할 리뷰 번호 > ");
+			reviewNo = sc.next();
+			updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
+		}catch (Exception e) {
+			FailView.errorMessage("숫자로 입력해주세요.");
+			selectUpdatedReview();
+		}
+		return updated;
+	}
+	
+	//리뷰 삭제
 	void deleteReview() {
 		String reviewNo = null;
-		
 		try {
 			System.out.print("삭제할 리뷰 번호 > ");
 			reviewNo = sc.next();
 			ReviewDTO deleted = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
 			FoodReviewController.deleteReview(deleted.getReviewNo());
-		}catch (Exception e) {
+		}catch (NumberFormatException e) {
 			FailView.errorMessage("숫자로 입력해주세요.");
 			deleteReview();
 		}

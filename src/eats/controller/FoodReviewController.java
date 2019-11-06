@@ -43,14 +43,17 @@ public class FoodReviewController {
 		}
 	}
 	
-	public static void searchRestaurantByName(String name) {
+	public static List<RestaurantDTO> searchRestaurantByName(String name) {
+		List<RestaurantDTO> list = null;
 		try {
-			List<RestaurantDTO> list = service.selectRestaurantByName(name);
+			list  = service.selectRestaurantByName(name);
 			if(list != null | !list.isEmpty())
 				SuccessView.printSearchBySth(list);;
 		}catch(Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		
+		return list;
 	}
 	
 	public static RestaurantDTO searchRestaurantByNo(int no) {
