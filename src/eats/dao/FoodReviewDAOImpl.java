@@ -28,15 +28,14 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 			ps.setString(1, "%"+addr+"%");
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				int restaurantNo = rs.getInt(1);
+				int restaurantNo = rs.getInt("1");
 				String restaurantName = rs.getString(2);
 				String seachAddr = rs.getString(3);
 				String tel = rs.getString(4);
 				String foodType = rs.getString(5);
 				String mainMenu = rs.getString(6);
 				
-				RestaurantDTO restaurantDTO = new RestaurantDTO(restaurantNo, restaurantName, 
-													seachAddr, tel, foodType, mainMenu);
+				RestaurantDTO restaurantDTO = new RestaurantDTO(restaurantNo, restaurantName, seachAddr, tel, foodType, mainMenu);
 				list.add(restaurantDTO);
 			}
 		}finally {
@@ -227,6 +226,7 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
 		String sql = proFile.getProperty("review.selectByReviewNo");
 		try {
 			con = DbUtil.getConnection();
@@ -234,12 +234,11 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 			ps.setInt(1, reviewNo);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				int restaurantNo = rs.getInt(1);
-				reviewNo = rs.getInt(2);
-				int score = rs.getInt(3);
-				String regdate = rs.getString(4);
-				String writer = rs.getString(5);
-				String content = rs.getString(6);
+				int restaurantNo = rs.getInt("restaurant_no");
+				int score = rs.getInt("score");
+				String regdate = rs.getString("regdate");
+				String writer = rs.getString("writer");
+				String content = rs.getString("content");
 				
 				reviewDTO = new ReviewDTO(restaurantNo, reviewNo, score, regdate, writer, content);
 			}
