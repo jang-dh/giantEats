@@ -53,7 +53,7 @@ public class FoodReviewController {
 		}
 	}
 	
-	public static RestaurantDTO searchRestaurantByNo(String no) {
+	public static RestaurantDTO searchRestaurantByNo(int no) {
 		RestaurantDTO restaurantDTO = null;
 		try {
 			restaurantDTO = service.selectRestaurantByNo(no);

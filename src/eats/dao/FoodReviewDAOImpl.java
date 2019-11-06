@@ -137,7 +137,7 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 	}
 
 	@Override
-	public RestaurantDTO selectRestaurantByNo(String restaurantNo) throws SQLException {
+	public RestaurantDTO selectRestaurantByNo(int restaurantNo) throws SQLException {
 		RestaurantDTO restaurantDTO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -146,7 +146,7 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, restaurantNo);
+			ps.setInt(1, restaurantNo);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int seachRestaurantNo = rs.getInt(1);
@@ -227,7 +227,7 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = proFile.getProperty("review.selectByRestaurantNo");
+		String sql = proFile.getProperty("review.selectByReviewNo");
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -235,6 +235,35 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				int restaurantNo = rs.getInt(1);
+				reviewNo = rs.getInt(2);
+				int score = rs.getInt(3);
+				String regdate = rs.getString(4);
+				String writer = rs.getString(5);
+				String content = rs.getString(6);
+				
+				reviewDTO = new ReviewDTO(restaurantNo, reviewNo, score, regdate, writer, content);
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return reviewDTO;
+	}
+
+	@Override
+	public List<ReviewDTO> selectReviewByRestaurantNo(int restaurantNo) throws SQLException {
+		ReviewDTO reviewDTO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = proFile.getProperty("review.selectByRestaurantNo");
+		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, restaurantNo);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				restaurantNo = rs.getInt(1);
 				int restaurantName = rs.getInt(2);
 				int score = rs.getInt(3);
 				String regdate = rs.getString(4);
@@ -243,11 +272,12 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 				
 				reviewDTO = new ReviewDTO(restaurantNo, restaurantName, 
 						score, regdate, writer, content);
+				list.add(reviewDTO);
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return reviewDTO;
+		return null;
 	}
 
 }

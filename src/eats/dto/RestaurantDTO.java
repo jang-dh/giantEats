@@ -23,6 +23,11 @@ public class RestaurantDTO {
 		this.foodType = foodType;
 		this.mainMenu = mainMenu;
 	}
+	public RestaurantDTO(int restaurantNo, String restaurantName, String addr, String tel, String foodType,
+			String mainMenu, List<ReviewDTO> list) {
+		this(restaurantNo, restaurantName, addr, tel, foodType, mainMenu);
+		this.list = list;
+	}
 	
 	public int getRestaurantNo() {
 		return restaurantNo;
@@ -59,6 +64,14 @@ public class RestaurantDTO {
 	}
 	public void setMainMenu(String mainMenu) {
 		this.mainMenu = mainMenu;
+	}
+	
+	public void setList(List<ReviewDTO> list) {
+		this.list = list;
+	}
+	
+	public List<ReviewDTO> getList(){
+		return list;
 	}
 	
 	@Override

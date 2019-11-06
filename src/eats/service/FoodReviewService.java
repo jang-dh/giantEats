@@ -20,7 +20,7 @@ public interface FoodReviewService {
 	List<RestaurantDTO> selectRestaurantByName(String name) throws SQLException;
 	
 	
-	RestaurantDTO selectRestaurantByNo(String restaurantNo) throws SQLException;
+	RestaurantDTO selectRestaurantByNo(int restaurantNo) throws SQLException;
 	
 	
 	int insertReview(ReviewDTO reviewDTO) throws SQLException;
@@ -33,4 +33,6 @@ public interface FoodReviewService {
 	
 	
 	ReviewDTO selectReviewByNo(int reviewNo) throws SQLException;
+	
+	List<ReviewDTO> selectReviewByRestaurantNo(int restaurantNo) throws SQLException;
 }

@@ -58,9 +58,10 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 	}
 
 	@Override
-	public RestaurantDTO selectRestaurantByNo(String restaurantNo) throws SQLException {
+	public RestaurantDTO selectRestaurantByNo(int restaurantNo) throws SQLException {
 		
 		RestaurantDTO result = dao.selectRestaurantByNo(restaurantNo);
+		result.setList(selectReviewByRestaurantNo(restaurantNo));
 		
 		if(result == null) {
 			throw new SQLException("해당하는 음식점 코드를 찾을 수 없습니다.");
@@ -108,6 +109,16 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 		
 		if(result == null) {
 			throw new SQLException("리뷰를 찾을 수 없습니다.");
+		}
+		return result;
+	}
+
+	@Override
+	public List<ReviewDTO> selectReviewByRestaurantNo(int restaurantNo) throws SQLException {
+		List<ReviewDTO> result = dao.selectReviewByRestaurantNo(restaurantNo);
+		
+		if(result == null) {
+			throw new SQLException("등록된 리뷰가 없습니다. 리뷰를 작성해주세요.");
 		}
 		return result;
 	}

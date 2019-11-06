@@ -42,6 +42,7 @@ public class PrintMenu {
 		System.out.println();
 		System.out.println("----------음식점 찾기----------");
 		System.out.println("1.지역    2.음식종류    3.지역/음식종류    4.이름");
+		System.out.println("X. 메인으로 돌아가기");
 		System.out.println("------------------------------");
 		System.out.print("메뉴 선택 > ");
 		
@@ -60,9 +61,14 @@ public class PrintMenu {
 			case "4":
 				searchRestaurantByName();
 				break;
-			default :
+			case "X":
+			case "x":
 				System.out.println();
-				System.out.println("메인 메뉴로 돌아갑니다.");
+				System.out.println("--메인 메뉴로 돌아갑니다.");
+				break;
+			default :
+				System.out.println("--다시 입력하세요.");
+				searchRestaurant();
 				break;
 		}
 		System.out.println();
@@ -145,19 +151,19 @@ public class PrintMenu {
 		
 		switch(menu) {
 			case "1":
-				foodType = "교동";
+				foodType = "한식";
 				break;
 			case "2":
-				foodType = "금호동";
+				foodType = "중식";
 				break;
 			case "3":
-				foodType = "노학동";
+				foodType = "양식";
 				break;
 			case "4":
-				foodType = "대포동";
+				foodType = "일식";
 				break;
 			case "5":
-				foodType = "도문동";
+				foodType = "뷔페";
 				break;
 		}
 		return foodType; 
@@ -205,13 +211,15 @@ public class PrintMenu {
 				}catch(NumberFormatException e) {
 					//FailView.errorMessage(e.getMessage());
 				}
-				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(code);
+				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
 				selectPrintReviewMenu(searched);
 				break;
 			case "N":
 			case "n":
 				break;
 			default :
+				System.out.println("--다시 입력하세요.");
+				searchRestaurantByNo();
 				break;
 		}
 	}
