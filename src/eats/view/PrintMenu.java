@@ -150,7 +150,7 @@ public class PrintMenu {
 		String addr = selectAddrToSearch();
 		List<RestaurantDTO> list = FoodReviewController.searchRestaurantByAddr(addr);
 		if(list != null && !list.isEmpty())
-			searchRestaurantByNo();
+			searchRestaurantByNo(list);
 	}
 	
 	//검색할 음식 종류 선택
@@ -195,8 +195,8 @@ public class PrintMenu {
 	//선택한 음식 종류로 검색
 	void searchRestaurantByFoodType() {
 		String foodType = selectFoodTypeToSearch();
-		FoodReviewController.searchRestaurantByFoodType(foodType);
-		searchRestaurantByNo();
+		List<RestaurantDTO> searched = FoodReviewController.searchRestaurantByFoodType(foodType);
+		searchRestaurantByNo(searched);
 		
 	}
 	
@@ -204,8 +204,8 @@ public class PrintMenu {
 	void searchRestaurantByAddrFoodType() {
 		String addr = selectAddrToSearch();
 		String foodType = selectFoodTypeToSearch();
-		FoodReviewController.searchRestaurantByAddrFoodType(addr, foodType);
-		searchRestaurantByNo();
+		List<RestaurantDTO> searched =FoodReviewController.searchRestaurantByAddrFoodType(addr, foodType);
+		searchRestaurantByNo(searched);
 	}
 	
 	//입력한 음식점 이름을 포함하는 레코드 검색
@@ -217,11 +217,11 @@ public class PrintMenu {
 		
 		List<RestaurantDTO> searched = FoodReviewController.searchRestaurantByName(name);
 		if(searched != null && !searched.isEmpty())
-			searchRestaurantByNo();
+			searchRestaurantByNo(searched);
 	}
 	
-	//음식점 코드로 검색
-	void searchRestaurantByNo() {
+	//음식점 코드로 검색 - 찾은 음식점 목록 내에서
+	void searchRestaurantByNo(List<RestaurantDTO> list) {
 		System.out.println();
 		System.out.println("-----음식점 코드로 찾기(Y/N)-----");
 		System.out.print("입력 > ");
@@ -231,30 +231,30 @@ public class PrintMenu {
 		switch(menu) {
 			case "Y":
 			case "y":
-				selectRestorantNoForSearch();
+				selectRestorantNoForSearch(list);
 				break;
 			case "N":
 			case "n":
 				break;
 			default :
 				System.out.println("--다시 입력하세요.");
-				searchRestaurantByNo();
+				searchRestaurantByNo(list);
 				break;
 		}
 	}
 
 	//음식점 코드 입력
-	void selectRestorantNoForSearch() {
+	void selectRestorantNoForSearch(List<RestaurantDTO> list) {
 		System.out.print("찾을 음식점 코드 > ");
 		String code = sc.next();
 		
 		try {
 			Integer.parseInt(code);
-			RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
+			RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code), list);
 			selectPrintReviewMenu(searched);
 		}catch(NumberFormatException e) {
 			System.out.println("--숫자를 입력해주세요.");
-			selectRestorantNoForSearch();
+			selectRestorantNoForSearch(list);
 		}
 	}
 	

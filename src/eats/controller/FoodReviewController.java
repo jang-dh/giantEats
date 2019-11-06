@@ -24,23 +24,27 @@ public class FoodReviewController {
 		return list;
 	}
 	
-	public static void searchRestaurantByFoodType(String foodType) {
+	public static List<RestaurantDTO> searchRestaurantByFoodType(String foodType) {
+		List<RestaurantDTO> list = null;
 		try {
-			List<RestaurantDTO> list = service.selectRestaurantByFoodType(foodType);
+			list = service.selectRestaurantByFoodType(foodType);
 			if(list != null | !list.isEmpty())
 				SuccessView.printSearchBySth(list);;
 		}catch(Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		return list;
 	}
-	public static void searchRestaurantByAddrFoodType(String addr, String foodType) {
+	public static List<RestaurantDTO> searchRestaurantByAddrFoodType(String addr, String foodType) {
+		List<RestaurantDTO> list = null;
 		try {
-			List<RestaurantDTO> list = service.selectRestaurantByAddrFoodType(addr, foodType);
+			list = service.selectRestaurantByAddrFoodType(addr, foodType);
 			if(list != null | !list.isEmpty())
 				SuccessView.printSearchBySth(list);;
 		}catch(Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		return list;
 	}
 	
 	public static List<RestaurantDTO> searchRestaurantByName(String name) {
@@ -56,10 +60,10 @@ public class FoodReviewController {
 		return list;
 	}
 	
-	public static RestaurantDTO searchRestaurantByNo(int no) {
+	public static RestaurantDTO searchRestaurantByNo(int no, List<RestaurantDTO> list) {
 		RestaurantDTO restaurantDTO = null;
 		try {
-			restaurantDTO = service.selectRestaurantByNo(no);
+			restaurantDTO = service.selectRestaurantByNo(no, list);
 			if(restaurantDTO != null) {
 				SuccessView.printRestaurant(restaurantDTO);
 			}
