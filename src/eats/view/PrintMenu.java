@@ -294,7 +294,10 @@ public class PrintMenu {
 				insertReview(restaurantDTO);
 				break;
 			case "2":
-				updateReview();
+				if(restaurantDTO.getList() != null && !restaurantDTO.getList().isEmpty())
+					updateReview();
+				else
+					FailView.errorMessage("수정할 리뷰가 없습니다. 리뷰를 등록해주세요.");
 				break;
 			case "3":
 				deleteReview();

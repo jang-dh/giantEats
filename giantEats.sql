@@ -42,5 +42,12 @@ SELECT * FROM review;
 SELECT * FROM review where restaurnat_no = ? order by redate desc;
 --리뷰 수정
 update review set score = ?, content = ? where review_no = ?;
+update review set score = 2, content = '으아아아' where review_no = 24;
 --리뷰 삭제
 delete from review where review_no = ?;
+
+SELECT * FROM review where restaurant_no = 1
+
+SELECT * FROM review where restaurant_no = 1 order by regdate desc
+
+SELECT * FROM review where review_no = 24

@@ -30,7 +30,7 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 		List<RestaurantDTO> list = dao.selectRestaurantByFoodType(foodType);
 		
 		if(list == null || list.isEmpty()) {
-			throw new SQLException("해당하는 음식종류가 없습니다.");
+			throw new SQLException("음식종류에 해당하는 음식점이 없습니다.");
 		}
 		return list;
 	}
@@ -41,7 +41,7 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 		List<RestaurantDTO> list = dao.selectRestaurantByAddrFoodType(addr, foodType);
 		
 		if(list == null || list.isEmpty()) {
-			throw new SQLException("해당하는 지역/음식종류가 없습니다.");
+			throw new SQLException("지역/음식종류에 해당하는 음식점이 없습니다.");
 		}
 		return list;
 	}
@@ -52,7 +52,7 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 		List<RestaurantDTO> list = dao.selectRestaurantByName(name);
 		
 		if(list == null || list.isEmpty()) {
-			throw new SQLException("해당하는 음식점을 찾을 수 없습니다.");
+			throw new SQLException("입력한 내용에 해당하는 음식점을 찾을 수 없습니다.");
 		}
 		return list;
 	}
