@@ -86,7 +86,8 @@ public class PrintMenu {
 		System.out.println("9.장사동    10.조양동   11.중앙동   12.청호동");
 		System.out.println("------------------------------");
 		System.out.print("지역 선택 > ");
-		
+
+		sc.nextLine();
 		String menu = sc.next();
 		String addr = null;
 		
@@ -127,8 +128,14 @@ public class PrintMenu {
 			case "12":
 				addr = "청호동";
 				break;
+			case "X":
+			case "x":
+				System.out.println();
+				System.out.println("--메인 메뉴로 돌아갑니다.");
+				break;
 			default :
-				System.out.println("메인으로 돌아갑니다.");
+				System.out.println("--다시 입력하세요.");
+				addr = selectAddrToSearch();
 				break;
 		}
 		return addr;
@@ -146,6 +153,7 @@ public class PrintMenu {
 		System.out.println("----------음식 종류로 음식점 찾기----------");
 		System.out.println("1.한식    2.중식    3.양식    4.일식    5.뷔페");
 		System.out.print("종류 선택 > ");
+		//sc.hasNextLine();
 		String menu = sc.next();
 		String foodType = null;
 		
@@ -209,7 +217,8 @@ public class PrintMenu {
 				try {
 					Integer.parseInt(code);
 				}catch(NumberFormatException e) {
-					//FailView.errorMessage(e.getMessage());
+					System.out.println("숫자를 입력해주세요.");
+					break;
 				}
 				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
 				selectPrintReviewMenu(searched);
@@ -239,6 +248,8 @@ public class PrintMenu {
 			case "n":
 				break;
 			default :
+				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				selectPrintReviewMenu(restaurantDTO);
 				break;
 		}
 	}
@@ -262,6 +273,8 @@ public class PrintMenu {
 				deleteReview();
 				break;
 			default :
+				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				printReviewMenu(restaurantDTO);
 				break;
 		}
 	}
