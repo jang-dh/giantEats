@@ -149,15 +149,15 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 			ps.setInt(1, restaurantNo);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				int seachRestaurantNo = rs.getInt(1);
-				String restaurantName = rs.getString(2);
-				String Addr = rs.getString(3);
-				String tel = rs.getString(4);
-				String searchFoodType = rs.getString(5);
-				String mainMenu = rs.getString(6);
+				restaurantNo = rs.getInt("restaurant_no");
+				String restaurantName = rs.getString("restaurant_name");
+				String addr = rs.getString("addr");
+				String tel = rs.getString("tel");
+				String foodType = rs.getString("food_type");
+				String mainMenu = rs.getString("main_menu");
 				
-				restaurantDTO = new RestaurantDTO(seachRestaurantNo, restaurantName, 
-													Addr, tel, searchFoodType, mainMenu);
+				restaurantDTO = new RestaurantDTO(restaurantNo, restaurantName, addr, tel, foodType, mainMenu);
+				restaurantDTO.setList(selectReviewByRestaurantNo(restaurantNo));
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
@@ -255,6 +255,8 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		//review.selectByRestaurantNo=SELECT * FROM review where restaurant_no =? order by regdate desc
+
 		String sql = proFile.getProperty("review.selectByRestaurantNo");
 		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		try {
@@ -263,21 +265,20 @@ public class FoodReviewDAOImpl implements FoodReviewDAO {
 			ps.setInt(1, restaurantNo);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				restaurantNo = rs.getInt(1);
-				int restaurantName = rs.getInt(2);
-				int score = rs.getInt(3);
-				String regdate = rs.getString(4);
-				String writer = rs.getString(5);
-				String content = rs.getString(6);
+				restaurantNo = rs.getInt("restaurant_no");
+				int reviewNo = rs.getInt("review_no");
+				int score = rs.getInt("score");
+				String regdate = rs.getString("regdate");
+				String writer = rs.getString("writer");
+				String content = rs.getString("content");
 				
-				reviewDTO = new ReviewDTO(restaurantNo, restaurantName, 
-						score, regdate, writer, content);
+				reviewDTO = new ReviewDTO(restaurantNo, reviewNo, score, regdate, writer, content);
 				list.add(reviewDTO);
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		return null;
+		return list;
 	}
 
 }

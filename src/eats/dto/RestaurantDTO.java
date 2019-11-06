@@ -76,20 +76,10 @@ public class RestaurantDTO {
 	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("�������ڵ� = ");
-		builder.append(restaurantNo);
-		builder.append(" | �������̸� = ");
-		builder.append(restaurantName);
-		builder.append(" | �ּ� = ");
-		builder.append(addr);
-		builder.append(" | ��ȣ = ");
-		builder.append(tel);
-		builder.append(" | �������� = ");
-		builder.append(foodType);
-		builder.append(" | ���θ޴� = ");
-		builder.append(mainMenu);
-
+		StringBuilder builder = new StringBuilder();;
+		builder.append(String.format("%10d | %s | ", restaurantNo, restaurantName));
+		builder.append(String.format("%s | %s | ", addr, tel));
+		builder.append(String.format("%s | %s | ", foodType, mainMenu));
 		return  builder.toString();
 	}
 	

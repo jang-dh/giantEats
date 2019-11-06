@@ -57,8 +57,9 @@ public class FoodReviewController {
 		RestaurantDTO restaurantDTO = null;
 		try {
 			restaurantDTO = service.selectRestaurantByNo(no);
-			if(restaurantDTO != null)
+			if(restaurantDTO != null) {
 				SuccessView.printRestaurant(restaurantDTO);
+			}
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}

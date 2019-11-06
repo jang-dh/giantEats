@@ -61,11 +61,11 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 	public RestaurantDTO selectRestaurantByNo(int restaurantNo) throws SQLException {
 		
 		RestaurantDTO result = dao.selectRestaurantByNo(restaurantNo);
-		result.setList(selectReviewByRestaurantNo(restaurantNo));
 		
 		if(result == null) {
 			throw new SQLException("해당하는 음식점 코드를 찾을 수 없습니다.");
 		}
+		
 		return result;
 	}
 

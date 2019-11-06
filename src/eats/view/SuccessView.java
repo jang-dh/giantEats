@@ -7,31 +7,42 @@ import eats.dto.ReviewDTO;
 
 public class SuccessView {
 	public static void printSearchBySth(List<RestaurantDTO> list) {
+		System.out.printf("%s | %10s | %30s | %15s | %s\n", "음식점코드", "이름", "주소", "전화번호", "음식종류");
 		for(int index = 0 ; index < list.size() ; index++)
-		System.out.println(list.get(index));
+			System.out.println(list.get(index));
 	}
 	
 	public static void printReview(List<ReviewDTO> list) {
-		for(int index = 0 ; index < list.size() ; index++)
-			System.out.println(list.get(index) + " " + printStar(list.get(index).getScore()));
-	}
-	
-	public static void printRestaurant(RestaurantDTO restaurantDTO) {
-		System.out.println(restaurantDTO);
+		System.out.println("-----리뷰 목록-----");
+		for(ReviewDTO reviewDTO : list)
+			System.out.printf("리뷰 번호  %d | %s | %s | 작성자 %s | 내용 %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
 	
 	public static void printReview(ReviewDTO reviewDTO) {
-		System.out.println(reviewDTO + " " + printStar(reviewDTO.getScore()));
+		System.out.printf("리뷰 번호  %d | %s | %s | 작성자 %s | 내용 %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
+	
+	
+	public static void printRestaurant(RestaurantDTO restaurantDTO) {
+		System.out.printf("이름 : %s\n", restaurantDTO.getRestaurantName());
+		System.out.printf("주소 : %s\n", restaurantDTO.getAddr());
+		System.out.printf("전화번호 : %s\n", restaurantDTO.getTel());
+		System.out.printf("종류 : %s\n", restaurantDTO.getFoodType());
+		System.out.printf("주 메뉴 : %s\n", restaurantDTO.getMainMenu());
+		printReview(restaurantDTO.getList());
+	
+	}
+	
 	
 	public static void printMessage(String message) {
 		System.out.println(message);
 	}
 
 	public static String printStar(int score) {
-		String star = null;
-		for(int i = 0 ; i < score; i ++) star += "★";
-		return star;
+		StringBuilder star = new StringBuilder();
+		for(int i = 0 ; i < score; i++) 
+			star.append("★");
+		return star.toString();
 	}
 	
 }
