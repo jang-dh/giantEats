@@ -222,18 +222,7 @@ public class PrintMenu {
 		switch(menu) {
 			case "Y":
 			case "y":
-				System.out.print("찾을 음식점 코드 > ");
-				String code = sc.next();
-				
-				try {
-					Integer.parseInt(code);
-				}catch(NumberFormatException e) {
-					System.out.println("숫자를 입력해주세요.");
-					searchRestaurantByNo();
-					break;
-				}
-				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
-				selectPrintReviewMenu(searched);
+				selectRestorantNoForSearch();
 				break;
 			case "N":
 			case "n":
@@ -245,6 +234,21 @@ public class PrintMenu {
 		}
 	}
 
+	//음식점 코드 입력
+	void selectRestorantNoForSearch() {
+		System.out.print("찾을 음식점 코드 > ");
+		String code = sc.next();
+		
+		try {
+			Integer.parseInt(code);
+			
+		}catch(NumberFormatException e) {
+			System.out.println("--숫자를 입력해주세요.");
+			selectRestorantNoForSearch();
+		}
+		RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
+		selectPrintReviewMenu(searched);
+	}
 	
 	void selectPrintReviewMenu(RestaurantDTO restaurantDTO) {
 		System.out.println("----메뉴 더보기(Y/N)");
@@ -272,7 +276,7 @@ public class PrintMenu {
 		System.out.println("1.리뷰 등록    2.리뷰 수정    3.리뷰 삭제");
 		System.out.println("X : 나가기");
 		System.out.print("메뉴 입력 > ");
-		
+		sc.nextLine(); //버퍼 비움
 		String menu = sc.next();
 		
 		switch(menu) {

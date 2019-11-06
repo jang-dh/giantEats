@@ -24,13 +24,15 @@ public class SuccessView {
 	
 	
 	public static void printRestaurant(RestaurantDTO restaurantDTO) {
+		System.out.println();
+		System.out.println("----------음식점 정보----------");
 		System.out.printf("이름 : %s\n", restaurantDTO.getRestaurantName());
 		System.out.printf("주소 : %s\n", restaurantDTO.getAddr());
 		System.out.printf("전화번호 : %s\n", restaurantDTO.getTel());
 		System.out.printf("종류 : %s\n", restaurantDTO.getFoodType());
 		System.out.printf("주 메뉴 : %s\n", restaurantDTO.getMainMenu());
 		printReview(restaurantDTO.getList());
-	
+		System.out.println();
 	}
 	
 	
