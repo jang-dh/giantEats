@@ -283,6 +283,11 @@ public class PrintMenu {
 			case "3":
 				deleteReview();
 				break;
+			case "X":
+			case "x":
+				System.out.println();
+				System.out.println("--메인 메뉴로 돌아갑니다.");
+				break;	
 			default :
 				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 				printReviewMenu(restaurantDTO);
@@ -297,20 +302,20 @@ public class PrintMenu {
 		try {
 			System.out.println("----------리뷰 등록----------");		
 			System.out.print("작성자 > ");
-			writer = sc.nextLine();
-			sc.nextLine();
-			System.out.print("별점 > ");
+			writer = sc.next();
+			System.out.print("별점(1~5점) > ");
 			score = sc.nextInt();
 			sc.nextLine();
 			System.out.print("내용 > ");
 			content = sc.nextLine();
 		}catch (Exception e) {
 			FailView.errorMessage("숫자로 입력해주세요.");
+			sc.nextLine();
 			insertReview(restaurantDTO);
 		}
 		ReviewDTO review = new ReviewDTO(restaurantDTO.getRestaurantNo(), 0, score, null, writer, content);
 		FoodReviewController.insertReview(review);
-		}
+	}
 	
 	void updateReview() {
 		System.out.println("----------리뷰 수정----------");
@@ -324,7 +329,7 @@ public class PrintMenu {
 
 		ReviewDTO updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
 		
-		System.out.print("별점 > ");
+		System.out.print("별점(1~5점) > ");
 		String score = sc.next();
 		try {
 			Integer.parseInt(score);

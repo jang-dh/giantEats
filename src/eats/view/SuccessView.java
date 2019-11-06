@@ -15,11 +15,11 @@ public class SuccessView {
 	public static void printReview(List<ReviewDTO> list) {
 		System.out.println("-----리뷰 목록-----");
 		for(ReviewDTO reviewDTO : list)
-			System.out.printf("리뷰 번호  %d | %s | %s | 작성자 %s | 내용 %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
+			System.out.printf("리뷰 번호  %d | %s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
 	
 	public static void printReview(ReviewDTO reviewDTO) {
-		System.out.printf("리뷰 번호  %d | %s | %s | 작성자 %s | 내용 %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
+		System.out.printf("리뷰 번호  %d | %s | %s | 작성자 : %s | 내용 : %s\n", reviewDTO.getReviewNo(), printStar(reviewDTO.getScore()), reviewDTO.getRegdate(), reviewDTO.getWriter(), reviewDTO.getContent());
 	}
 	
 	
