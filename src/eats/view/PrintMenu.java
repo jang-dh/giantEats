@@ -84,6 +84,7 @@ public class PrintMenu {
 		System.out.println("1.교동      2.금호동    3.노학동    4.대포동");
 		System.out.println("5.도문동    6.동명동    7.설악동    8.영랑동");
 		System.out.println("9.장사동    10.조양동   11.중앙동   12.청호동");
+		System.out.println("X. 메인으로 돌아가기");
 		System.out.println("------------------------------");
 		System.out.print("지역 선택 > ");
 
@@ -152,6 +153,7 @@ public class PrintMenu {
 		System.out.println();
 		System.out.println("----------음식 종류로 음식점 찾기----------");
 		System.out.println("1.한식    2.중식    3.양식    4.일식    5.뷔페");
+		System.out.println("X. 메인으로 돌아가기");
 		System.out.print("종류 선택 > ");
 		//sc.hasNextLine();
 		String menu = sc.next();
@@ -172,6 +174,15 @@ public class PrintMenu {
 				break;
 			case "5":
 				foodType = "뷔페";
+				break;
+			case "X":
+			case "x":
+				System.out.println();
+				System.out.println("--메인 메뉴로 돌아갑니다.");
+				break;
+			default :
+				System.out.println("--다시 입력하세요.");
+				foodType = selectFoodTypeToSearch();
 				break;
 		}
 		return foodType; 
@@ -280,20 +291,24 @@ public class PrintMenu {
 	}
 	
 	void insertReview(RestaurantDTO restaurantDTO) {
-		System.out.println("----------리뷰 등록----------");		
-		System.out.print("작성자 > ");
-		String writer = sc.next();
-		System.out.print("별점 > ");
-		String score = sc.next();
+		String writer = null;
+		int score = 0;
+		String content = null;
 		try {
-			Integer.parseInt(score);
-		}catch (NumberFormatException e) {
+			System.out.println("----------리뷰 등록----------");		
+			System.out.print("작성자 > ");
+			writer = sc.nextLine();
+			sc.nextLine();
+			System.out.print("별점 > ");
+			score = sc.nextInt();
+			sc.nextLine();
+			System.out.print("내용 > ");
+			content = sc.nextLine();
+		}catch (Exception e) {
 			FailView.errorMessage("숫자로 입력해주세요.");
+			insertReview(restaurantDTO);
 		}
-		System.out.println("내용 > ");
-		String content = sc.next();
-		
-		ReviewDTO review = new ReviewDTO(restaurantDTO.getRestaurantNo(), 0, Integer.parseInt(score), null, writer, content);
+		ReviewDTO review = new ReviewDTO(restaurantDTO.getRestaurantNo(), 0, score, null, writer, content);
 		FoodReviewController.insertReview(review);
 		}
 	
