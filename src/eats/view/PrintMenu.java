@@ -218,6 +218,7 @@ public class PrintMenu {
 					Integer.parseInt(code);
 				}catch(NumberFormatException e) {
 					System.out.println("숫자를 입력해주세요.");
+					searchRestaurantByNo();
 					break;
 				}
 				RestaurantDTO searched = FoodReviewController.searchRestaurantByNo(Integer.parseInt(code));
@@ -232,6 +233,7 @@ public class PrintMenu {
 				break;
 		}
 	}
+
 	
 	void selectPrintReviewMenu(RestaurantDTO restaurantDTO) {
 		System.out.println("----메뉴 더보기(Y/N)");
