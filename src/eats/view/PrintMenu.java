@@ -313,52 +313,61 @@ public class PrintMenu {
 			sc.nextLine();
 			System.out.print("내용 > ");
 			content = sc.nextLine();
+			
+			ReviewDTO review = new ReviewDTO(restaurantDTO.getRestaurantNo(), 0, score, null, writer, content);
+			FoodReviewController.insertReview(review);
 		}catch (Exception e) {
 			FailView.errorMessage("숫자로 입력해주세요.");
 			sc.nextLine();
 			insertReview(restaurantDTO);
 		}
-		ReviewDTO review = new ReviewDTO(restaurantDTO.getRestaurantNo(), 0, score, null, writer, content);
-		FoodReviewController.insertReview(review);
 	}
 	
 	void updateReview() {
-		System.out.println("----------리뷰 수정----------");
-		System.out.println("수정할 리뷰 > ");
-		String reviewNo = sc.next();
+		String reviewNo = null;
+		ReviewDTO updated = null;
+		String score = null;
+		String content = null;
 		try {
-			Integer.parseInt(reviewNo);
-		}catch (NumberFormatException e) {
+			System.out.println("----------리뷰 수정----------");
+			System.out.print("수정할 리뷰 번호> ");
+			reviewNo = sc.next();
+			updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
+			if (updated != null) {
+				try {
+					System.out.print("별점(1~5점) > ");
+					score = sc.next();
+					sc.nextLine();
+					updated.setScore(Integer.parseInt(score));
+					System.out.print("내용 > ");
+					content = sc.nextLine();
+					updated.setContent(content);
+					FoodReviewController.updateReview(updated);
+				}catch(Exception e) {
+					FailView.errorMessage("숫자로 입력해주세요.");
+					updateReview();
+				}
+			}else {
+				updateReview();
+			}
+		}catch (Exception e) {
 			FailView.errorMessage("숫자로 입력해주세요.");
+			updateReview();
 		}
 
-		ReviewDTO updated = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
-		
-		System.out.print("별점(1~5점) > ");
-		String score = sc.next();
-		try {
-			Integer.parseInt(score);
-		}catch (NumberFormatException e) {
-			FailView.errorMessage("숫자로 입력해주세요.");
-		}
-		System.out.println("내용 > ");
-		String content = sc.next();
-		
-		updated.setScore(Integer.parseInt(score));
-		updated.setContent(content);
-		FoodReviewController.updateReview(updated);
 	}
 	
 	void deleteReview() {
-		System.out.println("삭제할 리뷰 > ");
-		String reviewNo = sc.next();
-		try {
-			Integer.parseInt(reviewNo);
-		}catch (NumberFormatException e) {
-			FailView.errorMessage("숫자로 입력해주세요.");
-		}
+		String reviewNo = null;
 		
-		ReviewDTO deleted = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
-		FoodReviewController.deleteReview(deleted.getReviewNo());
+		try {
+			System.out.print("삭제할 리뷰 번호 > ");
+			reviewNo = sc.next();
+			ReviewDTO deleted = FoodReviewController.selectReviewByNo(Integer.parseInt(reviewNo));
+			FoodReviewController.deleteReview(deleted.getReviewNo());
+		}catch (Exception e) {
+			FailView.errorMessage("숫자로 입력해주세요.");
+			deleteReview();
+		}
 	}
 }
