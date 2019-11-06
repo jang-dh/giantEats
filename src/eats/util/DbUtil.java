@@ -27,7 +27,9 @@ public class DbUtil {
 	static {
 		try{
 			proFile.load(new FileInputStream("src/eats/util/dbInfo.properties"));
-			Class.forName(DbProperty.DRIVER_NAME);
+			proFile.load(new FileInputStream("src/eats/util/eats.properties"));
+			
+			Class.forName(proFile.getProperty("driverName"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -45,10 +47,8 @@ public class DbUtil {
 >>>>>>> branch 'master' of https://github.com/jang-dh/giantEats.git
 	 * */
 	public static Connection getConnection() throws SQLException{
-		return DriverManager.getConnection(
-				DbProperty.URL, 
-				DbProperty.USER, 
-				DbProperty.PASSWORD);
+		return DriverManager.getConnection(proFile.getProperty("url"), proFile.getProperty("userName")
+				, proFile.getProperty("userPass"));
 	}
 	
 	
