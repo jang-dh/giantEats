@@ -16,6 +16,7 @@ import java.util.Properties;
 >>>>>>> branch 'master' of https://github.com/jang-dh/giantEats.git
  * */
 public class DbUtil {
+
 	private static Properties proFile = new Properties();
 	/**
 <<<<<<< HEAD
