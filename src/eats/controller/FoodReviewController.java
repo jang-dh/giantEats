@@ -35,7 +35,7 @@ public class FoodReviewController {
 	}
 	public static void searchRestaurantByAddrFoodType(String addr, String foodType) {
 		try {
-			List<RestaurantDTO> list = service.selectRestaurantByFoodType(foodType);
+			List<RestaurantDTO> list = service.selectRestaurantByAddrFoodType(addr, foodType);
 			if(list != null | !list.isEmpty())
 				SuccessView.printSearchBySth(list);;
 		}catch(Exception e) {
